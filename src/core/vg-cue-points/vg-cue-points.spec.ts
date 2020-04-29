@@ -26,11 +26,11 @@ describe('Cue points', () => {
 
     xit('Should handle enter/exit events', () => {
 
-        let event = {
+        const event = {
             target: document.createElement('video')
         };
 
-        let track = event.target.addTextTrack('captions', 'test');
+        const track = event.target.addTextTrack('captions', 'test');
         track.addCue(new TextTrackCue(1, 2, 'cue 1')); // Illegal Constructor
 
         cuePoints.onLoad(event);
@@ -41,7 +41,7 @@ describe('Cue points', () => {
     it('Should handle onEnter event', () => {
         spyOn(cuePoints.onEnterCuePoint, 'emit').and.callThrough();
 
-        let event = {
+        const event = {
             target: {}
         };
 
@@ -53,7 +53,7 @@ describe('Cue points', () => {
     it('Should handle onExit event', () => {
         spyOn(cuePoints.onExitCuePoint, 'emit').and.callThrough();
 
-        let event = {
+        const event = {
             target: {}
         };
 

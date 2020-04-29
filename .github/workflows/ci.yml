@@ -1,0 +1,53 @@
+
+name: ci
+
+on: 
+  push:
+    branches:
+      - 'master'
+  pull_request:
+
+env:
+  CI: true
+  DEST_PATH: ./compiled
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+      - name: Install dependencies
+        run: npm install
+      # - name: Test
+      #   run: npm run test
+      - name: Build
+        run: npm run build -- --prod
+      - name: Archive artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: package
+          path: ${{env.DEST_PATH}}
+
+  release:
+    name: release
+    runs-on: ubuntu-latest
+    needs: build
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master')
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v1
+      - name: Download artifact
+        uses: actions/download-artifact@v1
+        with:
+          name: package
+          path: ${{env.DEST_PATH}}
+      - name: Install dependencies
+        run: npm install
+      - name: Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npx semantic-release
+        working-directory: ${{env.DEST_PATH}}

@@ -22,11 +22,11 @@ describe('Buffering', () => {
 
   describe('onPlayerReady', () => {
     it('should subscribe to bufferDetected media events', () => {
-      spyOn(api, 'getMediaById').and.returnValue(<any>{
+      spyOn(api, 'getMediaById').and.returnValue({
         subscriptions: {
           bufferDetected: { subscribe: jasmine.createSpy('bufferDetected') }
         }
-      });
+      } as any);
       vgBuffering.onPlayerReady();
       expect(vgBuffering.target.subscriptions.bufferDetected.subscribe).toHaveBeenCalled();
     });

@@ -1,13 +1,13 @@
-import { ChangeDetectorRef, OnInit, Directive, Input, OnDestroy } from "@angular/core";
-import { IPlayable, IMediaSubscriptions } from "./i-playable";
-import { Observable, Subscription, Subject, fromEvent } from "rxjs";
-import { map } from "rxjs/operators";
+import { ChangeDetectorRef, OnInit, Directive, Input, OnDestroy } from '@angular/core';
+import { IPlayable, IMediaSubscriptions } from './i-playable';
+import { Observable, Subscription, Subject, fromEvent } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { VgStates } from '../states/vg-states';
 import { VgAPI } from '../services/vg-api';
 import { VgEvents } from '../events/vg-events';
 import { IMediaElement } from './i-media-element';
-import {timer, combineLatest} from 'rxjs';
+import { timer, combineLatest } from 'rxjs';
 
 
 
@@ -83,43 +83,43 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
 
         this.subscriptions = {
             // Native events
-            abort: fromEvent(<any>this.elem, VgEvents.VG_ABORT),
-            canPlay: fromEvent(<any>this.elem, VgEvents.VG_CAN_PLAY),
-            canPlayThrough: fromEvent(<any>this.elem, VgEvents.VG_CAN_PLAY_THROUGH),
-            durationChange: fromEvent(<any>this.elem, VgEvents.VG_DURATION_CHANGE),
-            emptied: fromEvent(<any>this.elem, VgEvents.VG_EMPTIED),
-            encrypted: fromEvent(<any>this.elem, VgEvents.VG_ENCRYPTED),
-            ended: fromEvent(<any>this.elem, VgEvents.VG_ENDED),
-            error: fromEvent(<any>this.elem, VgEvents.VG_ERROR),
-            loadedData: fromEvent(<any>this.elem, VgEvents.VG_LOADED_DATA),
-            loadedMetadata: fromEvent(<any>this.elem, VgEvents.VG_LOADED_METADATA),
-            loadStart: fromEvent(<any>this.elem, VgEvents.VG_LOAD_START),
-            pause: fromEvent(<any>this.elem, VgEvents.VG_PAUSE),
-            play: fromEvent(<any>this.elem, VgEvents.VG_PLAY),
-            playing: fromEvent(<any>this.elem, VgEvents.VG_PLAYING),
-            progress: fromEvent(<any>this.elem, VgEvents.VG_PROGRESS),
-            rateChange: fromEvent(<any>this.elem, VgEvents.VG_RATE_CHANGE),
-            seeked: fromEvent(<any>this.elem, VgEvents.VG_SEEKED),
-            seeking: fromEvent(<any>this.elem, VgEvents.VG_SEEKING),
-            stalled: fromEvent(<any>this.elem, VgEvents.VG_STALLED),
-            suspend: fromEvent(<any>this.elem, VgEvents.VG_SUSPEND),
-            timeUpdate: fromEvent(<any>this.elem, VgEvents.VG_TIME_UPDATE),
-            volumeChange: fromEvent(<any>this.elem, VgEvents.VG_VOLUME_CHANGE),
-            waiting: fromEvent(<any>this.elem, VgEvents.VG_WAITING),
+            abort: fromEvent(this.elem as any, VgEvents.VG_ABORT),
+            canPlay: fromEvent(this.elem as any, VgEvents.VG_CAN_PLAY),
+            canPlayThrough: fromEvent(this.elem as any, VgEvents.VG_CAN_PLAY_THROUGH),
+            durationChange: fromEvent(this.elem as any, VgEvents.VG_DURATION_CHANGE),
+            emptied: fromEvent(this.elem as any, VgEvents.VG_EMPTIED),
+            encrypted: fromEvent(this.elem as any, VgEvents.VG_ENCRYPTED),
+            ended: fromEvent(this.elem as any, VgEvents.VG_ENDED),
+            error: fromEvent(this.elem as any, VgEvents.VG_ERROR),
+            loadedData: fromEvent(this.elem as any, VgEvents.VG_LOADED_DATA),
+            loadedMetadata: fromEvent(this.elem as any, VgEvents.VG_LOADED_METADATA),
+            loadStart: fromEvent(this.elem as any, VgEvents.VG_LOAD_START),
+            pause: fromEvent(this.elem as any, VgEvents.VG_PAUSE),
+            play: fromEvent(this.elem as any, VgEvents.VG_PLAY),
+            playing: fromEvent(this.elem as any, VgEvents.VG_PLAYING),
+            progress: fromEvent(this.elem as any, VgEvents.VG_PROGRESS),
+            rateChange: fromEvent(this.elem as any, VgEvents.VG_RATE_CHANGE),
+            seeked: fromEvent(this.elem as any, VgEvents.VG_SEEKED),
+            seeking: fromEvent(this.elem as any, VgEvents.VG_SEEKING),
+            stalled: fromEvent(this.elem as any, VgEvents.VG_STALLED),
+            suspend: fromEvent(this.elem as any, VgEvents.VG_SUSPEND),
+            timeUpdate: fromEvent(this.elem as any, VgEvents.VG_TIME_UPDATE),
+            volumeChange: fromEvent(this.elem as any, VgEvents.VG_VOLUME_CHANGE),
+            waiting: fromEvent(this.elem as any, VgEvents.VG_WAITING),
 
             // Advertisement only events
-            startAds: fromEvent(<any>window, VgEvents.VG_START_ADS),
-            endAds: fromEvent(<any>window, VgEvents.VG_END_ADS),
+            startAds: fromEvent(window as any, VgEvents.VG_START_ADS),
+            endAds: fromEvent(window as any, VgEvents.VG_END_ADS),
 
             // See changes on <source> child elements to reload the video file
             mutation: Observable.create(
                 (observer: any) => {
 
-                    let domObs = new MutationObserver((mutations) => {
+                    const domObs = new MutationObserver((mutations) => {
                         observer.next(mutations);
                     });
 
-                    domObs.observe(<any>this.elem, { childList: true, attributes: true });
+                    domObs.observe(this.elem as any, { childList: true, attributes: true });
 
                     return () => {
                         domObs.disconnect();
@@ -155,47 +155,47 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
     }
 
     prepareSync() {
-        let canPlayAll: Array<Observable<any>> = [];
+        const canPlayAll: Array<Observable<any>> = [];
 
-        for (let media in this.api.medias) {
-            if (this.api.medias[ media ]) {
-                canPlayAll.push(this.api.medias[ media ].subscriptions.canPlay);
+        for (const media in this.api.medias) {
+            if (this.api.medias[media]) {
+                canPlayAll.push(this.api.medias[media].subscriptions.canPlay);
             }
         }
 
         this.canPlayAllSubscription = combineLatest(canPlayAll).pipe(
             map((...params) => {
-                    const checkReadyState = (event) => {
-                        return event.target.readyState === 4;
-                    };
-                    let allReady: boolean = params.some(checkReadyState);
+                const checkReadyState = (event) => {
+                    return event.target.readyState === 4;
+                };
+                const allReady: boolean = params.some(checkReadyState);
 
-                    if (allReady && !this.syncSubscription) {
-                        this.startSync();
-                        this.syncSubscription.unsubscribe();
-                    }
+                if (allReady && !this.syncSubscription) {
+                    this.startSync();
+                    this.syncSubscription.unsubscribe();
                 }
+            }
             )).subscribe();
     }
 
     startSync() {
         this.syncSubscription = timer(0, 1000).subscribe(
             () => {
-                for (let media in this.api.medias) {
-                    if (this.api.medias[ media ] !== this) {
-                        let diff: number = this.api.medias[ media ].currentTime - this.currentTime;
+                for (const media in this.api.medias) {
+                    if (this.api.medias[media] !== this) {
+                        const diff: number = this.api.medias[media].currentTime - this.currentTime;
 
                         if (diff < -0.3 || diff > 0.3) {
                             this.playAtferSync = (this.state === VgStates.VG_PLAYING);
 
                             this.pause();
-                            this.api.medias[ media ].pause();
-                            this.api.medias[ media ].currentTime = this.currentTime;
+                            this.api.medias[media].pause();
+                            this.api.medias[media].currentTime = this.currentTime;
                         }
                         else {
                             if (this.playAtferSync) {
                                 this.play();
-                                this.api.medias[ media ].play();
+                                this.api.medias[media].play();
                                 this.playAtferSync = false;
                             }
                         }
@@ -207,12 +207,13 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
 
     onMutation(mutations: Array<MutationRecord>) {
         // Detect changes only for source elements or src attribute
-        for (let i=0, l=mutations.length; i<l; i++) {
-            let mut: MutationRecord = mutations[i];
+        for (let i = 0, l = mutations.length; i < l; i++) {
+            const mut: MutationRecord = mutations[i];
 
             if (mut.type === 'attributes' && mut.attributeName === 'src') {
                 // Only load src file if it's not a blob (for DASH / HLS sources)
-                if (mut.target['src'] && mut.target['src'].length > 0 && mut.target['src'].indexOf('blob:') < 0) {
+                const tg = mut.target as any;
+                if (tg.src && tg.src.length > 0 && tg.src.indexOf('blob:') < 0) {
                     this.loadMedia();
                     break;
                 }
@@ -274,7 +275,7 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
 
     get id() {
         // We should return undefined if vgMedia still doesn't exist
-        let result = undefined;
+        let result;
 
         if (this.vgMedia) {
             result = this.vgMedia.id;
@@ -346,7 +347,7 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
         this.state = VgStates.VG_PAUSED;
 
         // Live streaming check
-        let t:number = Math.round(this.time.total);
+        const t: number = Math.round(this.time.total);
         this.isLive = (t === Infinity);
         this.ref.detectChanges();
     }
@@ -394,7 +395,7 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
     }
     // @ts-ignore
     onTimeUpdate(event: any) {
-        let end = this.buffered.length - 1;
+        const end = this.buffered.length - 1;
 
         this.time = {
             current: this.currentTime * 1000,
@@ -409,7 +410,7 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
     }
     // @ts-ignore
     onProgress(event: any) {
-        let end = this.buffered.length - 1;
+        const end = this.buffered.length - 1;
 
         if (end >= 0) {
             this.buffer = { end: this.buffered.end(end) * 1000 };
@@ -466,9 +467,9 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
         this.bufferDetected.next(this.isBufferDetected);
     }
 
-    seekTime(value:number, byPercent:boolean = false) {
-        let second:number;
-        let duration:number = this.duration;
+    seekTime(value: number, byPercent: boolean = false) {
+        let second: number;
+        const duration: number = this.duration;
 
         if (byPercent) {
             second = value * duration / 100;
@@ -480,8 +481,8 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
         this.currentTime = second;
     }
 
-    addTextTrack(type:string, label?:string, language?:string, mode?:'disabled' | 'hidden' | 'showing'): TextTrack {
-        const newTrack:TextTrack = this.vgMedia.addTextTrack(type, label, language);
+    addTextTrack(type: string, label?: string, language?: string, mode?: 'disabled' | 'hidden' | 'showing'): TextTrack {
+        const newTrack: TextTrack = this.vgMedia.addTextTrack(type, label, language);
 
         if (mode) {
             newTrack.mode = mode;
@@ -509,7 +510,7 @@ export class VgMedia implements OnInit, OnDestroy, IPlayable {
             this.checkBufferSubscription.unsubscribe();
         }
 
-        if(this.syncSubscription) {
+        if (this.syncSubscription) {
             this.syncSubscription.unsubscribe();
         }
 

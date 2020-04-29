@@ -124,7 +124,7 @@ export class VgScrubBar implements OnInit, OnDestroy {
 
     protected seekMove(offset: number) {
         if (this.isSeeking) {
-            let percentage = Math.max(Math.min(offset * 100 / this.elem.scrollWidth, 99.9), 0);
+            const percentage = Math.max(Math.min(offset * 100 / this.elem.scrollWidth, 99.9), 0);
             this.target.time.current = percentage * this.target.time.total / 100;
             this.target.seekTime(percentage, true);
         }
@@ -133,7 +133,7 @@ export class VgScrubBar implements OnInit, OnDestroy {
     protected seekEnd(offset: number) {
         this.isSeeking = false;
         if (this.target.canPlay) {
-            let percentage = Math.max(Math.min(offset * 100 / this.elem.scrollWidth, 99.9), 0);
+            const percentage = Math.max(Math.min(offset * 100 / this.elem.scrollWidth, 99.9), 0);
             this.target.seekTime(percentage, true);
             if (this.wasPlaying) {
                 this.wasPlaying = false;

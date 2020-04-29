@@ -12,6 +12,7 @@ import {
 import { VgAPI } from '../../../core/services/vg-api';
 import { Subscription } from 'rxjs';
 
+// tslint:disable no-conflicting-lifecycle
 @Component({
     selector: 'vg-scrub-bar-cue-points',
     encapsulation: ViewEncapsulation.None,
@@ -21,7 +22,7 @@ import { Subscription } from 'rxjs';
                   class="cue-point"></span>
         </div>
     `,
-    styles: [ `
+    styles: [`
         vg-scrub-bar-cue-points {
             display: flex;
             width: 100%;
@@ -71,7 +72,7 @@ export class VgScrubBarCuePoints implements OnInit, OnChanges, OnDestroy, DoChec
     onPlayerReady() {
         this.target = this.API.getMediaById(this.vgFor);
 
-        let onTimeUpdate = this.target.subscriptions.loadedMetadata;
+        const onTimeUpdate = this.target.subscriptions.loadedMetadata;
         this.subscriptions.push(onTimeUpdate.subscribe(this.onLoadedMetadata.bind(this)));
 
         if (this.onLoadedMetadataCalled) {
@@ -86,22 +87,22 @@ export class VgScrubBarCuePoints implements OnInit, OnChanges, OnDestroy, DoChec
             this.cuePoints = [];
 
             for (let i = 0, l = this.vgCuePoints.length; i < l; i++) {
-                let end = (this.vgCuePoints[ i ].endTime >= 0) ? this.vgCuePoints[ i ].endTime : this.vgCuePoints[ i ].startTime + 1;
-                let cuePointDuration = (end - this.vgCuePoints[ i ].startTime) * 1000;
+                const end = (this.vgCuePoints[i].endTime >= 0) ? this.vgCuePoints[i].endTime : this.vgCuePoints[i].startTime + 1;
+                const cuePointDuration = (end - this.vgCuePoints[i].startTime) * 1000;
                 let position = '0';
                 let percentWidth = '0';
 
                 if (typeof cuePointDuration === 'number' && this.target.time.total) {
-                    percentWidth = ((cuePointDuration * 100) / this.target.time.total) + "%";
-                    position = (this.vgCuePoints[ i ].startTime * 100 / (Math.round(this.target.time.total / 1000))) + "%";
+                    percentWidth = ((cuePointDuration * 100) / this.target.time.total) + '%';
+                    position = (this.vgCuePoints[i].startTime * 100 / (Math.round(this.target.time.total / 1000))) + '%';
                 }
 
-                (<any>this.vgCuePoints[ i ]).$$style = {
+                (this.vgCuePoints[i] as any).$$style = {
                     width: percentWidth,
                     left: position
                 };
 
-                this.cuePoints.push(this.vgCuePoints[ i ]);
+                this.cuePoints.push(this.vgCuePoints[i]);
             }
         }
     }
@@ -115,7 +116,7 @@ export class VgScrubBarCuePoints implements OnInit, OnChanges, OnDestroy, DoChec
     }
 
     ngOnChanges(changes: { [propName: string]: SimpleChange }) {
-        if (changes[ 'vgCuePoints' ].currentValue) {
+        if (changes.vgCuePoints.currentValue) {
             this.updateCuePoints();
         }
     }

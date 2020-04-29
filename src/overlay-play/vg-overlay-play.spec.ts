@@ -33,11 +33,11 @@ describe('Videogular Player', () => {
   });
 
   it('Should get media by id on init', () => {
-    spyOn(api, 'getMediaById').and.returnValue(<any>{
+    spyOn(api, 'getMediaById').and.returnValue({
       subscriptions: {
         bufferDetected: { subscribe: jasmine.createSpy('bufferDetected') }
       }
-    });
+    } as any);
 
     overlayPlay.vgFor = 'test';
     overlayPlay.onPlayerReady();

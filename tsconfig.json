@@ -1,25 +1,28 @@
 {
-    "compilerOptions": {
-        "lib": ["es5", "es2015", "dom", "scripthost"],
-        "noImplicitAny": false,
-        "module": "commonjs",
-        "target": "es5",
-        "outDir": "compiled",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "noUnusedLocals": true,
-        "noUnusedParameters": true,
-        "inlineSourceMap": true,
-        "inlineSources": true,
-        "declaration": true,
-        "moduleResolution": "node"
-    },
-    "exclude": [
-        "docs/*",
-        "node_modules/*",
-        "coverage/*"
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
     ],
-    "angularCompilerOptions": {
-        "skipTemplateCodegen": true
+    "paths": {
+      "videogular2": [
+        "dist/videogular2"
+      ]
     }
+  },
+  "angularCompilerOptions": {
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
 }

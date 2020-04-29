@@ -1,15 +1,15 @@
-import {VgControls} from "./vg-controls";
+import {VgControls} from './vg-controls';
 import {VgControlsHidden} from './../core/services/vg-controls-hidden';
-import {ElementRef} from "@angular/core";
-import {VgAPI} from "../core/services/vg-api";
+import {ElementRef} from '@angular/core';
+import {VgAPI} from '../core/services/vg-api';
 
 
 import { VgStates } from '../core/states/vg-states';
 
 describe('Controls Bar', () => {
-    let controls:VgControls;
-    let ref:ElementRef;
-    let api:VgAPI;
+    let controls: VgControls;
+    let ref: ElementRef;
+    let api: VgAPI;
     let hidden: VgControlsHidden;
 
     beforeEach(() => {
@@ -40,7 +40,7 @@ describe('Controls Bar', () => {
 
     it('Should listen for mouseenter and mouseleave events', () => {
 
-        let vgElem = document.createElement('vg-player');
+        const vgElem = document.createElement('vg-player');
 
         api.registerElement(vgElem);
 

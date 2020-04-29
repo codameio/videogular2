@@ -1,7 +1,7 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { VgDASH } from "./vg-dash/vg-dash";
-import { VgHLS } from "./vg-hls/vg-hls";
+import { VgDASH } from './vg-dash/vg-dash';
+import { VgHLS } from './vg-hls/vg-hls';
 
 export interface IDRMLicenseServer {
     [index: string]: {
@@ -10,7 +10,7 @@ export interface IDRMLicenseServer {
 }
 
 @NgModule({
-    imports: [ CommonModule ],
+    imports: [CommonModule],
     declarations: [
         VgDASH, VgHLS
     ],
@@ -18,4 +18,4 @@ export interface IDRMLicenseServer {
         VgDASH, VgHLS
     ]
 })
-export class VgStreamingModule {}
+export class VgStreamingModule { }

@@ -1,11 +1,11 @@
-import {Injectable, EventEmitter} from '@angular/core';
-import {IPlayable} from "../vg-media/i-playable";
-import {VgStates} from "../states/vg-states";
+import { Injectable, EventEmitter } from '@angular/core';
+import { IPlayable } from '../vg-media/i-playable';
+import { VgStates } from '../states/vg-states';
 import { VgFullscreenAPI } from './vg-fullscreen-api';
 
 @Injectable()
 export class VgAPI {
-    medias:Object = {};// TODO: refactor to Set<IPlayable> 
+    medias: any = {}; // TODO: refactor to Set<IPlayable>
     videogularElement: any;
     playerReadyEvent: EventEmitter<any> = new EventEmitter(true);
     isPlayerReady = false;
@@ -21,17 +21,17 @@ export class VgAPI {
         this.playerReadyEvent.emit(this);
     }
 
-    getDefaultMedia():IPlayable {
-        for (let item in this.medias) {
+    getDefaultMedia(): IPlayable {
+        for (const item in this.medias) {
             if (this.medias[item]) {
                 return this.medias[item];
             }
         }
     }
 
-    getMasterMedia():IPlayable {
-        let master:any;
-        for (let id in this.medias) {
+    getMasterMedia(): IPlayable {
+        let master: any;
+        for (const id in this.medias) {
             if (this.medias[id].vgMaster === 'true' || this.medias[id].vgMaster === true) {
                 master = this.medias[id];
                 break;
@@ -40,9 +40,9 @@ export class VgAPI {
         return master || this.getDefaultMedia();
     }
 
-    isMasterDefined():boolean {
+    isMasterDefined(): boolean {
         let result = false;
-        for (let id in this.medias) {
+        for (const id in this.medias) {
             if (this.medias[id].vgMaster === 'true' || this.medias[id].vgMaster === true) {
                 result = true;
                 break;
@@ -51,7 +51,7 @@ export class VgAPI {
         return result;
     }
 
-    getMediaById(id:string = null):IPlayable {
+    getMediaById(id: string = null): IPlayable {
         let media = this.medias[id];
 
         if (!id || id === '*') {
@@ -62,15 +62,15 @@ export class VgAPI {
     }
 
     play() {
-        for (let id in this.medias) {
+        for (const id in this.medias) {
             if (this.medias[id]) {
-                this.medias[ id ].play();
+                this.medias[id].play();
             }
         }
     }
 
     pause() {
-        for (let id in this.medias) {
+        for (const id in this.medias) {
             if (this.medias[id]) {
                 this.medias[id].pause();
             }
@@ -161,17 +161,17 @@ export class VgAPI {
         return this.$$getAllProperties('textTracks');
     }
 
-    seekTime(value:number, byPercent:boolean = false) {
-        for (let id in this.medias) {
+    seekTime(value: number, byPercent: boolean = false) {
+        for (const id in this.medias) {
             if (this.medias[id]) {
-                this.$$seek(this.medias[ id ], value, byPercent);
+                this.$$seek(this.medias[id], value, byPercent);
             }
         }
     }
 
-    $$seek(media:IPlayable, value:number, byPercent:boolean = false) {
-        let second:number;
-        let duration:number = media.duration;
+    $$seek(media: IPlayable, value: number, byPercent: boolean = false) {
+        let second: number;
+        let duration: number = media.duration;
 
         if (byPercent) {
             if (this.isMasterDefined()) {
@@ -187,24 +187,24 @@ export class VgAPI {
         media.currentTime = second;
     }
 
-    addTextTrack(type:string, label?:string, language?:string) {
-        for (let id in this.medias) {
+    addTextTrack(type: string, label?: string, language?: string) {
+        for (const id in this.medias) {
             if (this.medias[id]) {
-                this.$$addTextTrack(this.medias[ id ], type, label, language);
+                this.$$addTextTrack(this.medias[id], type, label, language);
             }
         }
     }
-    $$addTextTrack(media:IPlayable, type:string, label?:string, language?:string) {
+    $$addTextTrack(media: IPlayable, type: string, label?: string, language?: string) {
         media.addTextTrack(type, label, language);
     }
 
-    $$getAllProperties(property:string){
+    $$getAllProperties(property: string) {
         const medias = {};
-        let result:any;
+        let result: any;
 
-        for (let id in this.medias) {
+        for (const id in this.medias) {
             if (this.medias[id]) {
-                medias[ id ] = this.medias[ id ];
+                medias[id] = this.medias[id];
             }
         }
 
@@ -223,7 +223,7 @@ export class VgAPI {
                         break;
 
                     case 'time':
-                        result = {current: 0, total: 0, left: 0};
+                        result = { current: 0, total: 0, left: 0 };
                         break;
                 }
                 break;
@@ -233,33 +233,33 @@ export class VgAPI {
                 const firstMediaId = Object.keys(medias)[0];
                 result = medias[firstMediaId][property];
                 break;
-                
+
             default:
                 // TODO: return 'master' value
-                let master = this.getMasterMedia();
+                const master = this.getMasterMedia();
                 result = medias[master.id][property];
         }
-        
+
         return result;
     }
 
-    $$setAllProperties(property:string, value:any){
-        for (let id in this.medias) {
+    $$setAllProperties(property: string, value: any) {
+        for (const id in this.medias) {
             if (this.medias[id]) {
-                this.medias[ id ][ property ] = value;
+                this.medias[id][property] = value;
             }
         }
     }
 
-    registerElement(elem:HTMLElement) {
+    registerElement(elem: HTMLElement) {
         this.videogularElement = elem;
     }
 
-    registerMedia(media:IPlayable) {
+    registerMedia(media: IPlayable) {
         this.medias[media.id] = media;
     }
 
-    unregisterMedia(media:IPlayable) {
+    unregisterMedia(media: IPlayable) {
         delete this.medias[media.id];
     }
 

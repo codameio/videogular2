@@ -35,7 +35,7 @@ describe('Playback Button', () => {
   });
 
   it('Should get media by id on init', () => {
-    spyOn(api, 'getMediaById').and.callFake(() => <any>{});
+    spyOn(api, 'getMediaById').and.callFake(() => {} as any);
 
     playbackButton.vgFor = 'test';
     playbackButton.onPlayerReady();
@@ -73,7 +73,7 @@ describe('Playback Button', () => {
     });
 
     it('should set playbackRate to target media', () => {
-      let media = {
+      const media = {
         playbackRate: {
           test: '1'
         }

@@ -8,11 +8,6 @@ import { VgUtils } from './services/vg-utils';
 import { VgControlsHidden } from './services/vg-controls-hidden';
 
 
-// components
-export * from './vg-player/vg-player';
-export * from './vg-media/vg-media';
-export * from './vg-cue-points/vg-cue-points';
-
 // services
 export * from './services/vg-api';
 export * from './services/vg-fullscreen-api';

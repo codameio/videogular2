@@ -1,11 +1,11 @@
-import {VgTimeDisplay} from "./vg-time-display";
-import {ElementRef} from "@angular/core";
-import {VgAPI} from "../../core/services/vg-api";
+import {VgTimeDisplay} from './vg-time-display';
+import {ElementRef} from '@angular/core';
+import {VgAPI} from '../../core/services/vg-api';
 
 describe('Time Display', () => {
-    let timeDisplay:VgTimeDisplay;
-    let ref:ElementRef;
-    let api:VgAPI;
+    let timeDisplay: VgTimeDisplay;
+    let ref: ElementRef;
+    let api: VgAPI;
     // @ts-ignore
     let renderer;
 
@@ -32,7 +32,7 @@ describe('Time Display', () => {
     });
 
     it('Should be initialized', () => {
-        spyOn(api, 'getMediaById').and.callFake(() => { return ref.nativeElement; });
+        spyOn(api, 'getMediaById').and.callFake(() => ref.nativeElement);
 
         timeDisplay.vgFor = 'test';
         timeDisplay.onPlayerReady();
@@ -46,19 +46,19 @@ describe('Time Display', () => {
             expect(timeDisplay.getTime()).toBe(0);
         });
         it('should return 0 when target and its property cannot be evaluated to number', () => {
-            timeDisplay.vgProperty = "something";
+            timeDisplay.vgProperty = 'something';
             timeDisplay.target = {
                 time: {
-                    "something": "abcd"
+                    something: 'abcd'
                 }
             };
             expect(timeDisplay.getTime()).toBe(0);
         });
         it('should return a rounded number when target and its vgProperty can be evaluated to number', () => {
-            timeDisplay.vgProperty = "something";
+            timeDisplay.vgProperty = 'something';
             timeDisplay.target = {
                 time: {
-                    "something": 5.3
+                    something: 5.3
                 }
             };
             expect(timeDisplay.getTime()).toBe(5);

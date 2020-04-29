@@ -1,3 +1,4 @@
+// tslint:disable-next-line: no-reference
 ///<reference path='./google.ima.ts'/>
 import { Component, ElementRef, Input, HostBinding, ViewEncapsulation, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { IPlayable } from '../core/vg-media/i-playable';
@@ -10,7 +11,7 @@ import { Subscription } from 'rxjs';
     selector: 'vg-ima-ads',
     encapsulation: ViewEncapsulation.None,
     template: `<div class="vg-ima-ads"></div>`,
-    styles: [ `
+    styles: [`
         vg-ima-ads {
             position: absolute;
             width: 100%;
@@ -30,7 +31,7 @@ export class VgImaAds implements OnInit, OnDestroy {
     @Input() vgNetwork: string;
     @Input() vgUnitPath: string;
     @Input() vgCompanion: string;
-    @Input() vgCompanionSize: Array<Number>;
+    @Input() vgCompanionSize: Array<number>;
     @Input() vgAdTagUrl: string;
     @Input() vgSkipButton: string;
 
@@ -63,7 +64,7 @@ export class VgImaAds implements OnInit, OnDestroy {
     }
 
     onPlayerReady() {
-        if (typeof google === "undefined") {
+        if (typeof google === 'undefined') {
             this.onMissingGoogleImaLoader();
             return;
         }

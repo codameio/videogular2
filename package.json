@@ -1,104 +1,66 @@
 {
-  "name": "videogular2",
-  "version": "0.0.0-semantically-released",
+  "name": "@codameio/videogular2",
+  "version": "9.1.0",
   "description": "Videogular is a video application framework for desktop and mobile powered by Angular",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/videogular/videogular2"
-  },
-  "peerDependencies": {
-    "@angular/core": "^8.0.0",
-    "rxjs": "^6.3.0"
-  },
-  "devDependencies": {
-    "@angular/animations": "^8.0.0",
-    "@angular/cli": "8.0.1",
-    "@angular/common": "^8.0.0",
-    "@angular/compiler": "^8.0.0",
-    "@angular/compiler-cli": "^8.0.0",
-    "@angular/core": "^8.0.0",
-    "@angular/platform-browser": "^8.0.0",
-    "@angular/platform-browser-dynamic": "^8.0.0",
-    "@angular/platform-server": "^8.0.0",
-    "@types/bluebird": "^3.5.25",
-    "@types/core-js": "0.9.46",
-    "@types/jasmine": "^3.3.1",
-    "@types/node": "10.12.12",
-    "codelyzer": "5.1.0",
-    "commitizen": "2.9.6",
-    "core-js": "^2.6.0",
-    "cz-conventional-changelog": "2.0.0",
-    "es-module-loader": "2.3.0",
-    "http-server": "0.11.1",
-    "husky": "^2.4.0",
-    "jasmine-core": "^3.3.0",
-    "karma": "^4.1.0",
-    "karma-chrome-launcher": "^2.2.0",
-    "karma-coverage": "^1.1.2",
-    "karma-firefox-launcher": "^1.1.0",
-    "karma-jasmine": "^2.0.1",
-    "karma-spec-reporter": "^0.0.32",
-    "npm-run-all": "4.1.5",
-    "reflect-metadata": "^0.1.10",
-    "remap-istanbul": "0.9.5",
-    "rimraf": "2.6.1",
-    "rxjs": "6.5.2",
-    "semantic-release": "6.3.2",
-    "systemjs": "^0.20.19",
-    "tslint": "5.17.0",
-    "typescript": "~3.4.5",
-    "validate-commit-msg": "2.12.1",
-    "watch": "1.0.2",
-    "zone.js": "0.9.1"
-  },
   "scripts": {
-    "prebuild": "npm run clean",
-    "build": "ngc",
-    "postbuild": "npm test",
-    "build:travis": "ngc",
-    "postbuild:travis": "npm run test",
-    "clean": "rimraf -rf ./src/**/*.js && rimraf -rf ./src/**/*.d.ts && rimraf -rf ./compiled",
+    "ng": "ng",
+    "build": "ng build",
+    "postbuild": "cp -r ./fonts ./compiled/fonts",
     "commit": "git-cz",
     "coverage": "http-server -c-1 -o -s -p 9875 ./coverage",
     "start": "run-p \"watch:ts\" \"start:coverage-server\"",
     "start:coverage-server": "http-server -c-1 -o -p 9875 ./coverage",
     "test": "karma start karma.conf.js",
     "posttest": "remap-istanbul -i ./coverage/coverage-final.json -o coverage -t html",
-    "report-coverage": "cat ./coverage/coverage-final.json | ./node_modules/.bin/remap-istanbul -o coverage-remapped.json",
-    "semantic-release": "semantic-release pre && npm publish && semantic-release post",
+    "semantic-release": "semantic-release",
     "watch:ts": "watch \"npm run build\" src",
-    "lint": "tslint -p tsconfig.json -c tslint.json --fix"
+    "lint": "ng lint"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test",
-      "commit-msg": "validate-commit-msg"
-    }
+  "peerDependencies": {
+    "@angular/core": "^9.1.3",
+    "tslib": "^1.10.0"
   },
-  "engines": {
-    "node": ">=10.9.0 <11.0.0"
-  },
-  "keywords": [
-    "video",
-    "player",
-    "framework",
-    "angular2",
-    "javascript"
-  ],
-  "author": "Raúl Jiménez <elecash@gmail.com>",
-  "contributors": [
-    {
-      "name": "Alberto García",
-      "email": "cernhelm@gmail.com"
-    },
-    {
-      "name": "Joan Llenas Masó",
-      "email": "joan.llenas.maso@gmail.com"
-    }
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/videogular/videogular2/issues"
+  "devDependencies": {
+    "@angular-devkit/build-angular": "~0.901.3",
+    "@angular-devkit/build-ng-packagr": "~0.901.3",
+    "@angular/animations": "~9.1.3",
+    "@angular/cli": "~9.1.3",
+    "@angular/common": "~9.1.3",
+    "@angular/compiler": "~9.1.3",
+    "@angular/compiler-cli": "~9.1.3",
+    "@angular/core": "~9.1.3",
+    "@angular/forms": "~9.1.3",
+    "@angular/language-service": "~9.1.3",
+    "@angular/platform-browser": "~9.1.3",
+    "@angular/platform-browser-dynamic": "~9.1.3",
+    "@angular/router": "~9.1.3",
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@types/jasmine": "~3.5.0",
+    "@types/jasminewd2": "~2.0.3",
+    "@types/node": "^12.11.1",
+    "codelyzer": "^5.1.2",
+    "cz-conventional-changelog": "3.1.0",
+    "husky": "4.2.5",
+    "jasmine-core": "~3.5.0",
+    "jasmine-spec-reporter": "~4.2.1",
+    "karma": "~5.0.0",
+    "karma-chrome-launcher": "~3.1.0",
+    "karma-coverage-istanbul-reporter": "~2.1.0",
+    "karma-jasmine": "~3.0.1",
+    "karma-jasmine-html-reporter": "^1.4.2",
+    "ng-packagr": "^9.0.0",
+    "protractor": "~5.4.3",
+    "reflect-metadata": "^0.1.13",
+    "remap-istanbul": "^0.13.0",
+    "rxjs": "~6.5.4",
+    "semantic-release": "17.0.7",
+    "systemjs": "^6.3.1",
+    "ts-node": "~8.3.0",
+    "tslib": "^1.10.0",
+    "tslint": "~6.1.0",
+    "typescript": "~3.8.3",
+    "zone.js": "~0.10.2"
   },
   "config": {
     "commitizen": {
@@ -132,6 +94,32 @@
       "helpMessage": "",
       "autoFix": false
     }
+  },
+  "keywords": [
+    "video",
+    "player",
+    "framework",
+    "angular2",
+    "javascript"
+  ],
+  "author": "Raúl Jiménez <elecash@gmail.com>",
+  "contributors": [
+    {
+      "name": "Alberto García",
+      "email": "cernhelm@gmail.com"
+    },
+    {
+      "name": "Joan Llenas Masó",
+      "email": "joan.llenas.maso@gmail.com"
+    }
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/codameio/videogular2"
+  },
+  "bugs": {
+    "url": "https://github.com/codameio/videogular2/issues"
   },
   "homepage": "http://videogular.com"
 }

@@ -1,40 +1,49 @@
-#################
-## Misc
-#################
-**/.DS_Store
-node_modules
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/compiled
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
+
+# dependencies
+/node_modules
+
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
+
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
+
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
 npm-debug.log
-**/*.js
-**/*.js.map
-**/*.d.ts
-**/*.metadata.json
-**/*.ngsummary.json
-coverage
-compiled
+yarn-error.log
+testem.log
+/typings
 docs/_book
 package-lock.json
 
-!karma.conf.js
-!karma-test-shim.js
-
-#################
-## JetBrains
-#################
-.idea
-.project
-.settings
-
-############
-## Windows
-############
-
-# Windows image file caches
+# System Files
+.DS_Store
 Thumbs.db
-
-# Folder config file
-Desktop.ini
-.angulardoc.json
-
-
-# VS Code
-.vscode

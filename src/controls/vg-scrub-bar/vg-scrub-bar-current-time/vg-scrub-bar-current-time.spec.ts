@@ -1,11 +1,11 @@
-import {VgScrubBarCurrentTime} from "./vg-scrub-bar-current-time";
-import {VgAPI} from "../../../core/services/vg-api";
-import {ElementRef} from "@angular/core";
+import {VgScrubBarCurrentTime} from './vg-scrub-bar-current-time';
+import {VgAPI} from '../../../core/services/vg-api';
+import {ElementRef} from '@angular/core';
 
 describe('Scrub bar current time', () => {
     let scrubBarCurrentTime: VgScrubBarCurrentTime;
-    let ref:ElementRef;
-    let api:VgAPI;
+    let ref: ElementRef;
+    let api: VgAPI;
 
     beforeEach(() => {
         ref = {
@@ -39,7 +39,7 @@ describe('Scrub bar current time', () => {
                 }
             };
 
-            let percent = scrubBarCurrentTime.getPercentage();
+            const percent = scrubBarCurrentTime.getPercentage();
 
             expect(percent).toEqual('50%');
         });
@@ -52,7 +52,7 @@ describe('Scrub bar current time', () => {
                 }
             };
 
-            let percent = scrubBarCurrentTime.getPercentage();
+            const percent = scrubBarCurrentTime.getPercentage();
 
             expect(percent).toEqual('25%');
         });

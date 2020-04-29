@@ -1,17 +1,17 @@
-import {async, TestBed} from "@angular/core/testing";
-import {Component} from "@angular/core";
-import {VgPlayer} from "./vg-player";
-import {VgAPI} from "../services/vg-api";
-import {VgFullscreenAPI} from "../services/vg-fullscreen-api";
-import {ElementRef} from "@angular/core";
+import {async, TestBed} from '@angular/core/testing';
+import {Component} from '@angular/core';
+import {VgPlayer} from './vg-player';
+import {VgAPI} from '../services/vg-api';
+import {VgFullscreenAPI} from '../services/vg-fullscreen-api';
+import {ElementRef} from '@angular/core';
 import { VgControlsHidden } from '../services/vg-controls-hidden';
 
 describe('Videogular Player', () => {
-    let player:VgPlayer;
-    let ref:ElementRef;
-    let api:VgAPI;
-    let fsAPI:VgFullscreenAPI;
-    let controlsHidden:VgControlsHidden;
+    let player: VgPlayer;
+    let ref: ElementRef;
+    let api: VgAPI;
+    let fsAPI: VgFullscreenAPI;
+    let controlsHidden: VgControlsHidden;
 
     beforeEach(() => {
         ref = {
@@ -74,10 +74,10 @@ describe('Videogular Player', () => {
 
     it('Should create a VgPlayer component',
         async(() => {
-            let fixture = TestBed.createComponent(VgPlayerTest);
+            const fixture = TestBed.createComponent(VgPlayerTest);
             fixture.detectChanges();
-            let compiled = fixture.debugElement.nativeElement;
-            let video = compiled.querySelector('video');
+            const compiled = fixture.debugElement.nativeElement;
+            const video = compiled.querySelector('video');
 
             expect(video.controls).toBe(true);
         })

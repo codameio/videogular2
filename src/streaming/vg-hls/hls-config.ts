@@ -1,13 +1,13 @@
 export interface IHLSConfig {
-    abrController: Function;
+    abrController: () => void;
     defaultAudioCodec: string;
-    fLoader: Function;
-    fetchSetup: Function;
-    loader: Function;
-    pLoader: Function;
+    fLoader: () => void;
+    fetchSetup: () => void;
+    loader: () => void;
+    pLoader: () => void;
     startLevel: number;
-    timelineController: Function;
-    xhrSetup: Function;
+    timelineController: () => void;
+    xhrSetup: () => void;
 
     autoStartLoad: boolean;
     startPosition: number;

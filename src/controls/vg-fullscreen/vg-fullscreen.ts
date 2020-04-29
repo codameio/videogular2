@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
              aria-label="fullscreen button"
              [attr.aria-valuetext]="ariaValue">
         </div>`,
-    styles: [ `
+    styles: [`
         vg-fullscreen {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -41,7 +41,7 @@ import { Subscription } from 'rxjs';
 export class VgFullscreen implements OnInit, OnDestroy {
     elem: HTMLElement;
     vgFor: string;
-    target: Object;
+    target: any;
     isFullscreen = false;
 
     subscriptions: Subscription[] = [];
