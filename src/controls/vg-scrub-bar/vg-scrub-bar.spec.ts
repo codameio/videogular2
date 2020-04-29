@@ -1,27 +1,27 @@
-import {VgScrubBar} from "./vg-scrub-bar";
-import {VgAPI} from "../../core/services/vg-api";
-import {ChangeDetectorRef, ElementRef} from "@angular/core";
+import {VgScrubBar} from './vg-scrub-bar';
+import {VgAPI} from '../../core/services/vg-api';
+import {ChangeDetectorRef, ElementRef} from '@angular/core';
 import {VgControlsHidden} from './../../core/services/vg-controls-hidden';
-import {VgMedia} from "../../core/vg-media/vg-media";
+import {VgMedia} from '../../core/vg-media/vg-media';
 import { VgStates } from '../../core/states/vg-states';
 import { VgMediaElement } from '../../core/vg-media/vg-media-element';
 
 describe('Scrub bar', () => {
-    let scrubBar:VgScrubBar;
-    let ref:ElementRef;
-    let cdRef:ChangeDetectorRef;
-    let api:VgAPI;
+    let scrubBar: VgScrubBar;
+    let ref: ElementRef;
+    let cdRef: ChangeDetectorRef;
+    let api: VgAPI;
     let vgControlsHiddenState: VgControlsHidden;
-    let media:VgMedia;
-    let elem = new VgMediaElement();
+    let media: VgMedia;
+    const elem = new VgMediaElement();
     elem.duration = 100;
     elem.currentTime = 0;
     elem.volume = 1;
     elem.playbackRate = 1;
     elem.buffered = {
         length: 2,
-        start: () => {return 0;},
-        end: () => {return 50;}
+        start: () => 0,
+        end: () => 50
     };
     elem.id = 'testVideo';
 
@@ -71,14 +71,14 @@ describe('Scrub bar', () => {
 
     describe('onMouseDownScrubBar', () => {
         it('should call API seekTime 10 when offsetX is 20 and scrollWidth is 200', () => {
-            api = <any>{
+            api = ({
                 seekTime: () => {},
                 pause: () => {},
                 registerMedia: () => {},
                 state: VgStates.VG_PLAYING,
                 isLive: false,
                 canPlay: true
-            };
+            } as any);
 
             spyOn(api, 'pause');
 

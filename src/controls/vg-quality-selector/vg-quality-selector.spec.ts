@@ -1,9 +1,8 @@
-import { VgQualitySelector } from "./vg-quality-selector";
-import { VgAPI } from "../../core/services/vg-api";
-import { ElementRef } from "@angular/core";
+import { VgQualitySelector } from './vg-quality-selector';
+import { VgAPI } from '../../core/services/vg-api';
+import { ElementRef } from '@angular/core';
 
 describe('Quality Selector control', () => {
-    
     // @ts-ignore
     let vgQualitySelector: VgQualitySelector;
 

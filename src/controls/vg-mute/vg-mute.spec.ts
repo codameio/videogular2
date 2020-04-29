@@ -32,7 +32,7 @@ describe('Mute Button', () => {
   });
 
   it('Should get media by id on init', () => {
-    spyOn(api, 'getMediaById').and.callFake(() => <any>{ volume: 1 });
+    spyOn(api, 'getMediaById').and.callFake(() => ({ volume: 1 } as any));
 
     mute.vgFor = 'test';
     mute.onPlayerReady();
@@ -50,7 +50,7 @@ describe('Mute Button', () => {
 
     mute.target = api;
 
-    let volume = mute.getVolume();
+    const volume = mute.getVolume();
 
     expect(volume).toBe(1);
   });

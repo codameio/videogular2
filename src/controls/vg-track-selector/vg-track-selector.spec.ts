@@ -76,14 +76,14 @@ describe('Track Selector control', () => {
 
   describe('selectTrack', () => {
     beforeEach(() => {
-      spyOn(vgTrackSelector.API, 'getMasterMedia').and.returnValue(<any>{
+      spyOn(vgTrackSelector.API, 'getMasterMedia').and.returnValue({
         elem: {
           textTracks: [
             { mode: 'showing', language: 'en' },
             { mode: 'hidden', language: 'es' }
           ]
         }
-      });
+      } as any);
     });
     it('Should select by track id', () => {
       vgTrackSelector.selectTrack('es');

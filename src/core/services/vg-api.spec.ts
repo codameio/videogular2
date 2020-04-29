@@ -1,9 +1,9 @@
-import {VgAPI} from "./vg-api";
-import {IPlayable} from "../vg-media/i-playable";
-import {VgStates} from "../states/vg-states";
+import {VgAPI} from './vg-api';
+import {IPlayable} from '../vg-media/i-playable';
+import {VgStates} from '../states/vg-states';
 
 describe('Videogular Player', () => {
-    let api:VgAPI;
+    let api: VgAPI;
 
     beforeEach(() => {
         api = new VgAPI();
@@ -15,7 +15,7 @@ describe('Videogular Player', () => {
             secondary: {id: 'secondary'}
         };
 
-        expect(api.getDefaultMedia()).toEqual(<IPlayable>{id: 'main'});
+        expect(api.getDefaultMedia()).toEqual({id: 'main'} as IPlayable);
     });
 
     describe('getMasterMedia', () => {
@@ -25,7 +25,7 @@ describe('Videogular Player', () => {
                 secondary: {id: 'secondary', vgMaster: true}
             };
 
-            expect(api.getMasterMedia()).toEqual(<any>{id: 'secondary', vgMaster: true});
+            expect(api.getMasterMedia()).toEqual({id: 'secondary', vgMaster: true} as any);
         });
         it('Should get the default media when no master is defined', () => {
             api.medias = {
@@ -43,7 +43,7 @@ describe('Videogular Player', () => {
             secondary: {id: 'secondary'}
         };
 
-        expect(api.getMediaById()).toEqual(<any>api);
+        expect(api.getMediaById()).toEqual(api as any);
     });
 
     it('Should get the api if we pass an *', () => {
@@ -52,7 +52,7 @@ describe('Videogular Player', () => {
             secondary: {id: 'secondary'}
         };
 
-        expect(api.getMediaById('*')).toEqual(<any>api);
+        expect(api.getMediaById('*')).toEqual(api as any);
     });
 
     it('Should get a media object if we pass an id', () => {
@@ -61,7 +61,7 @@ describe('Videogular Player', () => {
             secondary: {id: 'secondary'}
         };
 
-        expect(api.getMediaById('main')).toEqual(<IPlayable>{id: 'main'});
+        expect(api.getMediaById('main')).toEqual({id: 'main'} as IPlayable);
     });
 
     it('Should play all medias', () => {
@@ -70,13 +70,13 @@ describe('Videogular Player', () => {
             secondary: {id: 'secondary', play: () => {}}
         };
 
-        spyOn((<any>api.medias).main, 'play').and.callThrough();
-        spyOn((<any>api.medias).secondary, 'play').and.callThrough();
+        spyOn((api.medias as any).main, 'play').and.callThrough();
+        spyOn((api.medias as any).secondary, 'play').and.callThrough();
 
         api.play();
 
-        expect((<any>api.medias).main.play).toHaveBeenCalled();
-        expect((<any>api.medias).secondary.play).toHaveBeenCalled();
+        expect((api.medias as any).main.play).toHaveBeenCalled();
+        expect((api.medias as any).secondary.play).toHaveBeenCalled();
     });
 
     it('Should pause all medias', () => {
@@ -85,19 +85,19 @@ describe('Videogular Player', () => {
             secondary: {id: 'secondary', pause: () => {}}
         };
 
-        spyOn((<any>api.medias).main, 'pause').and.callThrough();
-        spyOn((<any>api.medias).secondary, 'pause').and.callThrough();
+        spyOn((api.medias as any).main, 'pause').and.callThrough();
+        spyOn((api.medias as any).secondary, 'pause').and.callThrough();
 
         api.pause();
 
-        expect((<any>api.medias).main.pause).toHaveBeenCalled();
-        expect((<any>api.medias).secondary.pause).toHaveBeenCalled();
+        expect((api.medias as any).main.pause).toHaveBeenCalled();
+        expect((api.medias as any).secondary.pause).toHaveBeenCalled();
     });
 
     it('Should get duration', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let duration = api.duration;
+        const duration = api.duration;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('duration');
     });
@@ -113,7 +113,7 @@ describe('Videogular Player', () => {
     it('Should get state', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let state = api.state;
+        const state = api.state;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('state');
     });
@@ -129,7 +129,7 @@ describe('Videogular Player', () => {
     it('Should get currentTime', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let currentTime = api.currentTime;
+        const currentTime = api.currentTime;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('currentTime');
     });
@@ -145,7 +145,7 @@ describe('Videogular Player', () => {
     it('Should get volume', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let volume = api.volume;
+        const volume = api.volume;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('volume');
     });
@@ -161,7 +161,7 @@ describe('Videogular Player', () => {
     it('Should get playbackRate', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let playbackRate = api.playbackRate;
+        const playbackRate = api.playbackRate;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('playbackRate');
     });
@@ -169,7 +169,7 @@ describe('Videogular Player', () => {
     it('Should get canPlay', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let canPlay = api.canPlay;
+        const canPlay = api.canPlay;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('canPlay');
     });
@@ -177,7 +177,7 @@ describe('Videogular Player', () => {
     it('Should get canPlayThrough', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let canPlayThrough = api.canPlayThrough;
+        const canPlayThrough = api.canPlayThrough;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('canPlayThrough');
     });
@@ -185,7 +185,7 @@ describe('Videogular Player', () => {
     it('Should get isMetadataLoaded', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let isMetadataLoaded = api.isMetadataLoaded;
+        const isMetadataLoaded = api.isMetadataLoaded;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('isMetadataLoaded');
     });
@@ -193,7 +193,7 @@ describe('Videogular Player', () => {
     it('Should get isWaiting', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let isWaiting = api.isWaiting;
+        const isWaiting = api.isWaiting;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('isWaiting');
     });
@@ -201,7 +201,7 @@ describe('Videogular Player', () => {
     it('Should get isCompleted', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let isCompleted = api.isCompleted;
+        const isCompleted = api.isCompleted;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('isCompleted');
     });
@@ -209,7 +209,7 @@ describe('Videogular Player', () => {
     it('Should get time', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let time = api.time;
+        const time = api.time;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('time');
     });
@@ -217,7 +217,7 @@ describe('Videogular Player', () => {
     it('Should get buffer', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let time = api.buffer;
+        const time = api.buffer;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('buffer');
     });
@@ -225,7 +225,7 @@ describe('Videogular Player', () => {
     it('Should get buffered', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let buffered = api.buffered;
+        const buffered = api.buffered;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('buffered');
     });
@@ -233,7 +233,7 @@ describe('Videogular Player', () => {
     it('Should get subscriptions', () => {
         spyOn(api, '$$getAllProperties').and.callFake(() => {});
         // @ts-ignore
-        let subscriptions = api.subscriptions;
+        const subscriptions = api.subscriptions;
 
         expect(api.$$getAllProperties).toHaveBeenCalledWith('subscriptions');
     });
@@ -267,23 +267,23 @@ describe('Videogular Player', () => {
     });
 
     it('Should seek media files to a specified time by second', () => {
-        let media = {
+        const media = {
             currentTime: 0
         };
 
-        api.$$seek(<IPlayable>media, 10);
+        api.$$seek(media as IPlayable, 10);
 
         expect(media.currentTime).toBe(10);
     });
 
     it('Should seek media files to a specified time by percentage', () => {
-        let media = {
+        const media = {
             duration: 200,
             currentTime: 0,
             subscriptions: {}
         };
 
-        api.$$seek(<any>media, 10, true);
+        api.$$seek(media as any, 10, true);
 
         expect(media.currentTime).toBe(20);
     });
@@ -294,7 +294,7 @@ describe('Videogular Player', () => {
             secondary: {id: 'secondary', state: VgStates.VG_PAUSED}
         };
 
-        let states = api.$$getAllProperties('state');
+        const states = api.$$getAllProperties('state');
 
         expect(states).toEqual(VgStates.VG_PLAYING);
     });
@@ -304,7 +304,7 @@ describe('Videogular Player', () => {
             main: {id: 'main', state: VgStates.VG_PLAYING}
         };
 
-        let states = api.$$getAllProperties('state');
+        const states = api.$$getAllProperties('state');
 
         expect(states).toEqual(VgStates.VG_PLAYING);
     });
@@ -317,24 +317,24 @@ describe('Videogular Player', () => {
 
         api.$$setAllProperties('state', VgStates.VG_PLAYING);
 
-        expect((<any>api.medias).main.state).toBe(VgStates.VG_PLAYING);
-        expect((<any>api.medias).secondary.state).toBe(VgStates.VG_PLAYING);
+        expect((api.medias as any).main.state).toBe(VgStates.VG_PLAYING);
+        expect((api.medias as any).secondary.state).toBe(VgStates.VG_PLAYING);
     });
 
     it('Should register a new media object', () => {
-        let media = {id: 'main'};
+        const media = {id: 'main'};
 
-        api.registerMedia(<IPlayable>media);
+        api.registerMedia(media as IPlayable);
 
-        expect(api.medias['main']).toBe(media);
+        expect(api.medias.main).toBe(media);
     });
 
     it('Should register a new media object', () => {
-        let media = {id: 'main'};
-        api['main'] = {};
+        const media = {id: 'main'};
+        api.main = {};
 
-        api.unregisterMedia(<IPlayable>media);
+        api.unregisterMedia(media as IPlayable);
 
-        expect(api.medias['main']).toBe(undefined);
+        expect(api.medias.main).toBe(undefined);
     });
 });

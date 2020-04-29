@@ -75,7 +75,7 @@ export class VgFullscreenAPI {
             }
         };
 
-        for (let browser in APIs) {
+        for (const browser in APIs) {
             if (APIs[ browser ].enabled in document) {
                 this.polyfill = APIs[ browser ];
                 break;

@@ -33,7 +33,7 @@ import { Subscription } from 'rxjs';
             -moz-border-radius: 2px;
             border-radius: 2px;
         }
-        
+
         vg-scrub-bar-current-time .slider{
             background: white;
             height: 15px;

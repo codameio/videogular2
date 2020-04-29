@@ -24,7 +24,7 @@ describe('Videogular Player', () => {
   });
 
   it('Should get media by id on init', () => {
-    spyOn(api, 'getMediaById').and.callFake(() => <any>{});
+    spyOn(api, 'getMediaById').and.callFake(() => {} as any);
 
     fullscreen.vgFor = 'test';
     fullscreen.onPlayerReady();

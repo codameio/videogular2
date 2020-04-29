@@ -79,7 +79,7 @@ export class VgPlayPause implements OnInit, OnDestroy {
     }
 
     playPause() {
-        let state = this.getState();
+        const state = this.getState();
 
         switch (state) {
             case VgStates.VG_PLAYING:

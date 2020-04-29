@@ -57,7 +57,7 @@ export class VgScrubBarBufferingTime implements OnInit, OnDestroy {
     }
 
     getBufferTime() {
-        let bufferTime = "0%";
+        let bufferTime = '0%';
 
         if (this.target && this.target.buffer && this.target.buffered.length) {
             if (this.target.time.total === 0) {

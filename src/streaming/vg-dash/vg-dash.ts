@@ -8,7 +8,7 @@ import {
     OnInit,
     Output,
     EventEmitter
-} from "@angular/core";
+} from '@angular/core';
 import { VgAPI } from '../../core/services/vg-api';
 import { Subscription } from 'rxjs';
 import { IDRMLicenseServer } from '../streaming';
@@ -21,19 +21,19 @@ declare let dashjs;
     exportAs: 'vgDash'
 })
 export class VgDASH implements OnInit, OnChanges, OnDestroy {
-    @Input() vgDash:string;
-    @Input() vgDRMToken:string;
-    @Input() vgDRMLicenseServer:IDRMLicenseServer;
+    @Input() vgDash: string;
+    @Input() vgDRMToken: string;
+    @Input() vgDRMLicenseServer: IDRMLicenseServer;
 
     @Output() onGetBitrates: EventEmitter<BitrateOption[]> = new EventEmitter();
 
     vgFor: string;
     target: any;
-    dash:any;
+    dash: any;
 
     subscriptions: Subscription[] = [];
 
-    constructor(private ref:ElementRef, public API:VgAPI) {}
+    constructor(private ref: ElementRef, public API: VgAPI) {}
 
     ngOnInit() {
         if (this.API.isPlayerReady) {
@@ -50,8 +50,8 @@ export class VgDASH implements OnInit, OnChanges, OnDestroy {
         this.createPlayer();
     }
 
-    ngOnChanges(changes:SimpleChanges) {
-        if (changes['vgDash'] && changes['vgDash'].currentValue) {
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes.vgDash && changes.vgDash.currentValue) {
             this.createPlayer();
         }
         else {
@@ -75,8 +75,8 @@ export class VgDASH implements OnInit, OnChanges, OnDestroy {
                 drmOptions = this.vgDRMLicenseServer;
 
                 if (this.vgDRMToken) {
-                    for (let drmServer in drmOptions) {
-                        if(drmServer.hasOwnProperty(drmServer)) {
+                    for (const drmServer in drmOptions) {
+                        if (drmServer.hasOwnProperty(drmServer)) {
                             drmOptions[drmServer].httpRequestHeaders = { Authorization: this.vgDRMToken };
                         }
                     }

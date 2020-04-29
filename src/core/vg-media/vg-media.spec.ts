@@ -1,24 +1,24 @@
-import { VgMedia } from "./vg-media";
-import { VgAPI } from "../services/vg-api";
-import { ChangeDetectorRef } from "@angular/core";
-import { VgStates } from "../states/vg-states";
+import { VgMedia } from './vg-media';
+import { VgAPI } from '../services/vg-api';
+import { ChangeDetectorRef } from '@angular/core';
+import { VgStates } from '../states/vg-states';
 import { VgMediaElement } from './vg-media-element';
 import { fakeAsync, tick } from '@angular/core/testing';
 
 
 describe('Videogular Media', () => {
-    let media:VgMedia;
-    let cdRef:ChangeDetectorRef;
-    let api:VgAPI;
-    let elem = new VgMediaElement();
+    let media: VgMedia;
+    let cdRef: ChangeDetectorRef;
+    let api: VgAPI;
+    const elem = new VgMediaElement();
     elem.duration = 100;
     elem.currentTime = 0;
     elem.volume = 1;
     elem.playbackRate = 1;
     elem.buffered = {
         length: 2,
-        start: () => {return 0;},
-        end: () => {return 50;}
+        start: () => 0,
+        end: () => 50
     };
     elem.id = 'testVideo';
 
@@ -37,18 +37,18 @@ describe('Videogular Media', () => {
         elem.currentTime = 0;
     });
 
-    it('Should load a new media if a change on dom have been happened', <any>fakeAsync((): void => {
+    it('Should load a new media if a change on dom have been happened', fakeAsync((): void => {
         spyOn(elem, 'load').and.callThrough();
         spyOn(elem, 'pause').and.callThrough();
 
         media.onMutation([
-            <any>{
+            {
                 type: 'attributes',
                 attributeName: 'src',
                 target: {
                     src: 'my-new-file.mp4'
                 }
-            }
+            } as any
         ]);
 
         tick(10);
@@ -56,7 +56,7 @@ describe('Videogular Media', () => {
         expect(elem.load).toHaveBeenCalled();
         expect(elem.pause).toHaveBeenCalled();
         expect(elem.currentTime).toBe(0);
-    }));
+    }) as any);
 
     it('Should not be master by default', () => {
         expect(media.vgMaster).toBeFalsy();
@@ -175,8 +175,8 @@ describe('Videogular Media', () => {
         elem.currentTime = 25;
         elem.buffered = {
             length: 0,
-            start: () => {return 0;},
-            end: () => {return 0;}
+            start: () => 0,
+            end: () => 0
         };
 
         media.onTimeUpdate({});
@@ -187,8 +187,8 @@ describe('Videogular Media', () => {
 
         elem.buffered = {
             length: 2,
-            start: () => {return 0;},
-            end: () => {return 50;}
+            start: () => 0,
+            end: () => 50
         };
     });
 
@@ -201,8 +201,8 @@ describe('Videogular Media', () => {
     it('Should handle onProgress native event (without buffer)', () => {
         elem.buffered = {
             length: 0,
-            start: () => {return 0;},
-            end: () => {return 0;}
+            start: () => 0,
+            end: () => 0
         };
 
         media.onProgress({});
@@ -211,8 +211,8 @@ describe('Videogular Media', () => {
 
         elem.buffered = {
             length: 2,
-            start: () => {return 0;},
-            end: () => {return 50;}
+            start: () => 0,
+            end: () => 50
         };
     });
 });

@@ -141,6 +141,15 @@ export interface IMediaElement {
      * Gets or sets the volume level for audio portions of the media element.
      */
     volume: number;
+    readonly HAVE_CURRENT_DATA: number;
+    readonly HAVE_ENOUGH_DATA: number;
+    readonly HAVE_FUTURE_DATA: number;
+    readonly HAVE_METADATA: number;
+    readonly HAVE_NOTHING: number;
+    readonly NETWORK_EMPTY: number;
+    readonly NETWORK_IDLE: number;
+    readonly NETWORK_LOADING: number;
+    readonly NETWORK_NO_SOURCE: number;
     addTextTrack(kind: string, label?: string, language?: string): TextTrack;
     /**
      * Returns a string that specifies whether the client can play a given media resource type.
@@ -174,14 +183,5 @@ export interface IMediaElement {
      */
     play(): Promise<any>;
     setMediaKeys(mediaKeys: MediaKeys | null): Promise<void>;
-    readonly HAVE_CURRENT_DATA: number;
-    readonly HAVE_ENOUGH_DATA: number;
-    readonly HAVE_FUTURE_DATA: number;
-    readonly HAVE_METADATA: number;
-    readonly HAVE_NOTHING: number;
-    readonly NETWORK_EMPTY: number;
-    readonly NETWORK_IDLE: number;
-    readonly NETWORK_LOADING: number;
-    readonly NETWORK_NO_SOURCE: number;
     addEventListener(type: string, listener: EventListenerOrEventListenerObject, useCapture?: boolean): void;
 }

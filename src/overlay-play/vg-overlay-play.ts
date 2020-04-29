@@ -117,7 +117,7 @@ export class VgOverlayPlay implements OnInit, OnDestroy {
 
     @HostListener('click')
     onClick() {
-        let state = this.getState();
+        const state = this.getState();
 
         switch (state) {
             case VgStates.VG_PLAYING:

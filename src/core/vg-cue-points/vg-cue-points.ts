@@ -29,7 +29,7 @@ export class VgCuePoints implements OnInit, OnDestroy, DoCheck {
     }
 
     onLoad(event: any) {
-        let cues: TextTrackCue[] = event.target.track.cues;
+        const cues: TextTrackCue[] = event.target.track.cues;
 
         this.ref.nativeElement.cues = cues;
 
@@ -57,7 +57,7 @@ export class VgCuePoints implements OnInit, OnDestroy, DoCheck {
     }
 
     ngDoCheck() {
-        
+
         if (this.ref.nativeElement.track && this.ref.nativeElement.track.cues) {
             const changes = this.totalCues !== this.ref.nativeElement.track.cues.length;
 

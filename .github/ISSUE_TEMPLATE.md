@@ -17,6 +17,6 @@
 
 | **Image Title** |
 | --- |
-| (https://media.giphy.com/media/143vPc6b08locw/giphy.gif) |
+| ![](https://media.giphy.com/media/143vPc6b08locw/giphy.gif) |
 | Image description |
 

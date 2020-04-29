@@ -21,13 +21,13 @@ import { BitrateOption } from '../../core/core';
                  [class.vg-icon-hd]="!bitrateSelected">
                 {{ bitrateSelected?.label }}
             </div>
-            
-            <select class="quality-selector" 
+
+            <select class="quality-selector"
                     (change)="selectBitrate($event.target.value)"
                     tabindex="0"
                     aria-label="quality selector"
                     [attr.aria-valuetext]="ariaValue">
-                <option 
+                <option
                     *ngFor="let bitrate of bitrates"
                     [value]="bitrate.qualityIndex"
                     [selected]="bitrate.qualityIndex === bitrateSelected?.qualityIndex">
@@ -36,7 +36,7 @@ import { BitrateOption } from '../../core/core';
             </select>
         </div>
     `,
-    styles: [ `
+    styles: [`
         vg-quality-selector {
             -webkit-touch-callout: none;
             -webkit-user-select: none;
@@ -56,7 +56,7 @@ import { BitrateOption } from '../../core/core';
             display: flex;
             flex-grow: 1;
             align-items: center;
-            
+
             padding: 0;
             margin: 5px;
         }
@@ -115,7 +115,7 @@ export class VgQualitySelector implements OnInit, OnChanges, OnDestroy {
     }
 
     ngOnChanges(changes: SimpleChanges) {
-        if (changes['bitrates'].currentValue && changes['bitrates'].currentValue.length) {
+        if (changes.bitrates.currentValue && changes.bitrates.currentValue.length) {
             this.bitrates.forEach(item => item.label = item.label || Math.round(item.bitrate / 1000).toString());
         }
     }

@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 @Pipe({ name: 'vgUtc' })
 export class VgUtcPipe implements PipeTransform {
     transform(value: number, format: string): string {
-        let date = new Date(value);
+        const date = new Date(value);
         let result = format;
         let ss: string|number = date.getUTCSeconds();
         let mm: string|number = date.getUTCMinutes();
@@ -22,9 +22,9 @@ export class VgUtcPipe implements PipeTransform {
             hh = '0' + hh;
         }
 
-        result = result.replace(/ss/g, <string>ss);
-        result = result.replace(/mm/g, <string>mm);
-        result = result.replace(/hh/g, <string>hh);
+        result = result.replace(/ss/g, ss as string);
+        result = result.replace(/mm/g, mm as string);
+        result = result.replace(/hh/g, hh as string);
 
         return result;
     }

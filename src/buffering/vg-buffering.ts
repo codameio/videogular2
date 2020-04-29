@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
                 <div class="loadingSpinner"></div>
             </div>
         </div>`,
-    styles: [ `
+    styles: [`
         vg-buffering {
             display: none;
             z-index: 201;
@@ -20,7 +20,7 @@ import { Subscription } from 'rxjs';
         vg-buffering.is-buffering {
             display: block;
         }
-        
+
         .vg-buffering {
             position: absolute;
             display: block;
