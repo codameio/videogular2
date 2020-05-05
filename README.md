@@ -1,5 +1,5 @@
 # Videogular
-[![travis build](https://travis-ci.org/videogular/videogular2.svg?branch=master)](https://travis-ci.org/videogular/videogular2)
+[![Github Actions](https://github.com/codameio/videogular2/workflows/build/badge.svg)](https://github.com/codameio/videogular2/actions)
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/2fdevs/videogular?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Greenkeeper badge](https://badges.greenkeeper.io/videogular/videogular2.svg)](https://greenkeeper.io/)
 
@@ -11,7 +11,50 @@ Documentation: https://videogular.github.io/videogular2
 
 # How to install
 
-To get up and running quickly, check out the [getting started guide](https://videogular.github.io/videogular2/docs/getting-started/).
+This is a fork of `videogular2`, so installation might be a little different than [original repo](https://github.com/videogular/videogular2#how-to-install).
+
+### Installation
+
+```
+npm install @codameio/videogular2
+```
+
+### Usage
+
+import styles
+```
+// global.scss
+@import "~@codameio/videogular2/fonts/videogular.css";
+```
+
+import modules
+```
+// module.ts
+import {
+  VgCoreModule,
+  VgControlsModule,
+  VgOverlayPlayModule,
+  VgBufferingModule
+} from '@codameio/videogular2';
+
+@NgModule({
+  imports: [
+    ...
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule
+  ],
+```
+in the template
+```
+// component.html
+<vg-player>
+  <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
+      <source src="http://static.videogular.com/assets/videos/videogular.mp4" type="video/mp4">
+  </video>
+</vg-player>
+```
 
 ## NPM commands
 
